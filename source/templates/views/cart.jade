@@ -1,0 +1,49 @@
+extends extends/layout
+
+block content
+
+    div.content
+        div.container
+            .row
+                div.cart.col-md-12
+                    .row
+                        .col-sm-5
+                            h3 Your items
+                            .cart-item
+                                img(src="/assets/images/item1.jpg")
+                                h4 Item 1
+                                h5 Price: £10
+                                a Delete
+                            .cart-item
+                                img(src="/assets/images/item2.jpg")
+                                h4 Item 2
+                                h5 Price: £10
+                                a Delete
+                        .col-sm-6
+                            h3 Shipping Address
+                            form(method="POST")
+                                .form-group
+                                    label(for="first") First name
+                                    input(type="text", id="first", min="1", placeholder="First name", name="first").form-field
+
+                                    label(for="last") Last name
+                                    input(type="text", id="last", min="1", placeholder="Last name", name="last").form-field
+                                .form-group
+                                    label(for="address1") Address Line 1
+                                    input(type="text", id="address1", min="1", placeholder="Address line 1", name="address1").form-field
+                                .form-group
+                                    label(for="address2") Address Line 2
+                                    input(type="text", id="address2", min="1", placeholder="Address line 2", name="address2").form-field
+                                .form-group
+                                    label(for="address3") Address Line 3
+                                    input(type="text", id="address3", min="1", placeholder="Address line 3", name="address3").form-field
+                                .form-group
+                                    label(for="city") City
+                                    input(type="text", id="city", min="1", placeholder="City", name="city").form-field
+                                .form-group
+                                    label(for="post") Post Code
+                                    input(type="text", id="post", min="1", placeholder="Post Code", name="post").form-field
+                                .form-group
+                                    label(for="country") Country
+                                    input(type="text", id="country", min="1", placeholder="Country", name="country").form-field
+                            h4 Total:

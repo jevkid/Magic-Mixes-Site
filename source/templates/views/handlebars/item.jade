@@ -1,0 +1,16 @@
+script(data-template='item', type='text/ractive').
+  <div class="row">
+    {{#each result}}
+      <div class="col-md-3 col-sm-6">
+       	<div class="item">
+          <img src="{{url}}">
+          <h4> {{title}} </h4>
+          <h5> Price: £{{price}} </h5>
+          <div class="item-content">
+          	<p> {{description}}</p>
+            <a class="btn" href="#"> Add to cart </a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>

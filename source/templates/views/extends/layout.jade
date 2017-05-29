@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    head
+      meta(charset='UTF-8')
+      meta(http-equiv='X-UA-Compatible', content='IE=edge')
+      meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+      block title
+        title Magic Mixes
+      script(src='http://cdn.ractivejs.org/latest/ractive.js')
+      script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js")
+      script(src="/assets/scripts/scripts.js")
+      link(rel='stylesheet', href='/assets/stylesheets/main.css')
+      link(rel='stylesheet', href='/assets/stylesheets/bootstrap.css')
+      link(rel='stylesheet', href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css")
+      link(href="https://fonts.googleapis.com/css?family=Cabin|Cabin+Condensed|News+Cycle|Questrial|Francois+One|Poppins|Josefin+Sans|Karla|Open+Sans+Condensed:300|Taviraj", rel="stylesheet")
+
+  body
+    block header
+      header
+        .nav-bar
+          ul.drop.container
+            li: a(href="/index.html") Home
+            li: a(href="#") Products
+              ul
+                li: a(href="/products.html") Earrings
+                li: a(href="#") Beaded Products
+                li: a(href="#") Wish Bracelets
+                li: a(href="#") Charms
+                li: a(href="#") Awareness Bracelets
+                li: a(href="#") Pendant/Necklaces
+                li: a(href="#") Pendants/Handbag Charms
+                li: a(href="#") Gemstone Bracelets
+                li: a(href="#") Gemstone & Sterling
+            li.right: a(href="/search.html")
+              i.ml-lg.fa.fa-search
+            li.right: a(href="/cart.html")
+              i.ml-lg.fa.fa-shopping-cart
+    block content
+
+    block footer
+      //footer
+        .footer

@@ -1,0 +1,14 @@
+extends extends/layout
+
+block content
+  include handlebars/item
+  div.content
+    div.container
+      .row
+        .col-md-6
+          .sort
+            label Sort by:
+            select
+              option Price: High - Low
+              option Price: Low - High
+      div(data-outlet="item")

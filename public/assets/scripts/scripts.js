@@ -11,6 +11,26 @@ var helpers = function(){
       computed: options.computed ? options.computed : {}
     });
   };
+
+  module.compileHandlebars = function(options, overwrite) {
+    var template = document.querySelector('[data-template="' + options.template + '"]').innerHTML;
+
+    var hbsTemplate = Handlebars.compile(template);
+    var compiledTemplate = hbsTemplate(options.data ? options.data : {});
+
+    if(!options.$outlet) {
+      options.$outlet = $('[data-outlet="' + options.outlet + '"]');
+    }
+
+    if(overwrite) {
+      options.$outlet.html($(compiledTemplate));
+    } else {
+      options.$outlet.append($(compiledTemplate));
+    }
+
+
+  };
+
   return module;
 }();
 var indexController = function(){
@@ -25,8 +45,8 @@ var indexController = function(){
 	module.setupTemplates = function(){
 
 		var template = helpers.compileRactive({
-			template: 'index',
-			outlet: 'index',
+			template: 'item',
+			outlet: 'item',
 			data: {}
 		});
     
@@ -37,8 +57,8 @@ var indexController = function(){
       url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
       dataType: 'jsonp',
       success: function(response){
-        template.set('test', response);
-        console.log(template.get('test'));
+        template.set('result', response.results);
+        console.log(template.get('result'));
       },
     });
 	};

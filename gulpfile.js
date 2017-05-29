@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     handlebars = require('gulp-compile-handlebars'),
     concat = require('gulp-concat'),
     jade = require('gulp-jade'),
+    del = require('del'),
     uglify = require('gulp-uglify'),
     webserver = require('gulp-webserver'),
     connect = require('gulp-connect'),
@@ -48,15 +49,18 @@ gulp.task('build-less', function(){
         .pipe(gulp.dest('public/assets/stylesheets'));
 });
 
-
-gulp.task('build-templates', function(){
-    return gulp.src('source/templates/views/**/*')
-        .pipe(jade())
-        .pipe(concat('index.html'))
-        .pipe(gulp.dest('public'));
+gulp.task('clean', function() {
+  return del.sync(['public', '!public/assets']);
 });
 
-gulp.task('default', ['build-less', 'scripts', 'build-ractive', 'build-templates', 'build-boot', 'serve']);
+
+gulp.task('build-templates', function() {
+  return gulp.src(['source/templates/views/**', '!source/templates/*/'])
+    .pipe(jade())
+    .pipe(gulp.dest('public'));
+});
+
+gulp.task('default', ['build-less', 'scripts', 'build-ractive', 'build-templates', 'clean', 'build-boot', 'serve']);
 
 gulp.task('watch', function() {
     gulp.watch('source/less/**', ['build-less']);

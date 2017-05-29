@@ -1,16 +1,17 @@
-doctype html
-html(lang='en-ca')
-  head
-    meta(charset='UTF-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
-    block title   
-      title Magic Mixes
 
-    link(rel="stylesheet", type="text/css", href="/assets/stylesheets/main.css")
-    link(rel="stylesheet", type="text/css", href="/assets/stylesheets/bootstrap.css")
-    script(src='http://cdn.ractivejs.org/latest/ractive.js')
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js")
-    script(src="/assets/scripts/scripts.js")
-  body
-    div(data-outlet="index")
+extends extends/layout
+
+block content
+  div.content
+    div.container
+      .row
+        .col-sm-9
+          .about
+            h1 Welcome to Magic Mixes
+            p Here's some information about this site. Take a look and read some more. Here's some information about this site. Take a look and read some more.
+            p
+        .col-sm-3
+          div.card
+            h3 About the Artist
+            img(src="/assets/images/profile.gif")
+            p Read about the artist here! Take a look and read some more. Read about the artist here! Take a look and read some more.
