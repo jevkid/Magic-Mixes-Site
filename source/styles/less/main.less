@@ -1,0 +1,192 @@
+/** Main CSS **/
+html body {
+  background-color: @linen !important;
+  margin: 0;
+}
+html.login {
+  background: #2D0F3A url("/assets/images/1.jpg") no-repeat;
+}
+body.login {
+  background-color: transparent !important;
+}
+.content {
+  z-index: 30;
+}
+.nav-bar {
+  width: 100%;
+  top: 0;
+  background: #2D0F3A url("/assets/images/1.jpg") repeat top left;
+
+  ul {
+    z-index: 50;
+    position: relative;
+    padding: 5px 0;
+    li {
+      list-style: none;
+      display: inline-block;
+      padding: 10px 10px;
+      a {
+        font-family: @open;
+        font-size: 20px;
+        color: @secondary;
+      }
+      a:hover {
+        cursor: pointer;
+        color: @light-grey;
+        text-decoration: none;
+      }
+      &.right {
+        float: right;
+      }
+      ul {
+        overflow: hidden;
+        margin-top: 10px;
+        position: absolute;
+        background-color: @light-grey;
+        box-shadow: 2px 2px 5px rgb(12, 31, 66, 1);
+        border: 1px solid rgba(0,0,0,0.15);
+        border-top: none;
+        display: none;
+        li {
+          display: block;
+          &:last-child {
+            float: none;
+          }
+          a {
+            color: @primary;
+          }
+        }
+        li:hover {
+          background: #2D0F3A url("/assets/images/1.jpg") repeat right;
+
+          a {
+            color: @secondary;
+          }
+        }
+      }
+      &:hover > ul {
+        display: block;
+      }
+    }
+  }
+  ul.drop {
+    li:last-child {
+      float: right;
+    }
+  }
+}
+.about {
+  width: 75%;
+  text-align: center;
+
+  p {
+    padding-top: 15px;
+  }
+}
+
+.item {
+  height: auto;
+  background: #ffffff;
+  text-align: center;
+  margin-bottom: 51px;
+  box-shadow: 0px 1px 2px 0px rgba(0,0,0,.2);
+  padding: 5px 0;
+  img {
+    padding-top: 15px;
+    width: 150px;
+  }
+
+}
+.cart-item {
+  height: auto;
+  padding: 15px 10px;
+  border-bottom: 1px solid @secondary;
+  img {
+    border: 1px solid @grey;
+    width: 150px;
+  }
+}
+.card {
+  height: 400px;
+  background: #ffffff;
+  text-align: center;
+  margin-bottom: 51px;
+  box-shadow: 0px 1px 2px 0px rgba(0,0,0,.2);
+  img {
+    width: 100px;
+    border-radius: 50%;
+    margin-top: 30px;
+  }
+  h3, h4, h5 {
+    padding-top: 15px;
+  }
+  p {
+    padding-top: 15px;
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.cart {
+  width: auto;
+  height: 100%;
+  background: #ffffff;
+  padding: 10px;
+  box-shadow: 0px 1px 2px 0px rgba(0,0,0,.2);
+  .row {
+    margin-left: 50px;
+  }
+}
+.sort {
+  label {
+    margin-right: 5px;
+  }
+  padding: 10px 0;
+}
+
+.btn {
+  width: auto;
+  padding: 2px 2px;
+  background-color: @primary;
+  color: @secondary;
+}
+
+.footer {
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+  position: fixed;
+  margin: 0 auto;
+  background: #2D0F3A url("/assets/images/1.jpg") repeat top left;
+}
+
+.login-box {
+  height: 400px;
+  width: 500px;
+  margin: 10% auto;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0px 1px 2px 0px rgba(0,0,0,.2);
+  h2 {
+    padding-top: 20%;
+  }
+  .form-group {
+    padding-top: 25px;
+  }
+  a {
+    margin-top: 35px;
+  }
+}
+
+.form-group {
+  display: block;
+  input {
+    margin: 5px 5px 5px 0px;
+  }
+  label {
+    margin-right: 5px;
+  }
+  .text-right {
+    text-align: right;
+  }
+}

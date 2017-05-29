@@ -1,0 +1,54 @@
+{
+  "name": "Magic-Mixes-REST-API",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node Server.js"
+  },
+  "dependencies": {
+    "MD5": "~1.2.1",
+    "autoprefixer": "^6.5.1",
+    "body-parser": "~1.15.1",
+    "bootstrap": "^4.0.0-alpha.5",
+    "cookie-parser": "~1.4.3",
+    "cssnano": "^3.7.7",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "gulp-compile-handlebars": "^0.6.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-handlebars": "^4.0.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-less": "^3.1.0",
+    "gulp-postcss": "^6.2.0",
+    "gulp-ractive": "^0.8.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.1",
+    "gulp-watch": "^4.3.10",
+    "gulp-webserver": "^0.9.1",
+    "handlebars": "^4.0.6",
+    "jade": "~1.11.0",
+    "jquery": "^3.2.1",
+    "mongoose": "~3.6.13",
+    "morgan": "~1.7.0",
+    "mysql": "~2.5.5",
+    "ractive": "^0.8.10",
+    "serve-favicon": "~2.3.0",
+    "webserver": "^1.1.2"
+  },
+  "description": "Magic Mixes",
+  "main": "app.js",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Megan Jevin",
+  "license": "ISC"
+}
