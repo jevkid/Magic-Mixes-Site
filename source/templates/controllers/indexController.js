@@ -1,10 +1,11 @@
 var indexController = function(){
 
 	var module = {};
+	var credentials;
 
 	module.init = function(){
     indexController.setupTemplates();
-    console.log('setup');
+
 	};
 
 	module.setupTemplates = function(){
@@ -12,18 +13,21 @@ var indexController = function(){
 		var template = helpers.compileRactive({
 			template: 'item',
 			outlet: 'item',
-			data: {}
+			data: {},
+			apiKey: helpers.loadFile('apiKey'),
+			shopName: helpers.loadFile('shopName')
 		});
-    
-    var apiKey = 'tz1wjg6wvmvezr1o3xv4rom6';
-    var shopName = 'VelvetFoxStudio';
+
+		console.log(template.get('apiKey'));
+
+    var apiKey = template.get('apiKey');
+    var shopName = template.get('shopName');
 
     $.ajax({
       url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
       dataType: 'jsonp',
-      success: function(response){
-        template.set('result', response.results);
-        console.log(template.get('result'));
+      success: function(data){
+        template.set('result', data.results);
       },
     });
 	};

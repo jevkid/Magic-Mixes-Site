@@ -30,11 +30,16 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('build-ractive', function() {
-    return gulp.src('source/templates/controllers/*')
+    return gulp.src(['source/templates/controllers/*', '!source/templates/controllers/info.json'])
         .pipe(ractive({
           preserveWhitespace: true
         }))
         .pipe(gulp.dest('public/assets/scripts'));
+});
+
+gulp.task('copy-json', function() {
+    return gulp.src(['source/templates/controllers/info.json'])
+        .pipe(gulp.dest('public/assets'));
 });
 
 gulp.task('build-boot', function() {
@@ -60,13 +65,13 @@ gulp.task('build-templates', function() {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('default', ['build-less', 'scripts', 'build-ractive', 'build-templates', 'clean', 'build-boot', 'serve']);
+gulp.task('default', ['build-less', 'scripts', 'build-ractive', 'copy-json', 'build-templates', 'clean', 'build-boot', 'serve']);
 
 gulp.task('watch', function() {
     gulp.watch('source/less/**', ['build-less']);
     gulp.watch('public/assets/stylesheets/bootstrap.css');
     gulp.watch('public/assets/stylesheets/main.css');
-    gulp.watch('public/assets/scripts/**');
+    gulp.watch('source/templates/controllers/**', ['build-ractive']);
     gulp.watch('source/templates/views/**', ['build-templates']);
 });
 

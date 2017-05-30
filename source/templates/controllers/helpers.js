@@ -31,5 +31,34 @@ var helpers = function(){
 
   };
 
+  module.loadJson = function(callback){
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', '/assets/info.json', true);
+    xobj.onreadystatechange = function() {
+      if (xobj.readyState == 4 && xobj.status == "200") {
+          // .open will NOT return a value but simply returns undefined in async mode so use a callback
+          callback(xobj.responseText);
+      }
+    }
+    xobj.send(null);
+  };
+
+  module.loadFile = function(type) {
+    $.getJSON('/assets/info.json', function(data){
+      var credentials = JSON.stringify(data);
+      console.log(data[0]);
+      console.log(data.apiKey);
+      var apiKey = credentials[0].apiKey;
+      var shopName = credentials[0].shopName;
+      if(type === apiKey){
+        return apiKey;
+      }
+      if(type === shopName){
+        return shopName;
+      }
+    });
+  };
+
   return module;
 }();
