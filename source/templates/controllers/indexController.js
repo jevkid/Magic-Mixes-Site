@@ -18,8 +18,6 @@ var indexController = function(){
 			shopName: helpers.loadFile('shopName')
 		});
 
-		console.log(template.get('apiKey'));
-
     var apiKey = template.get('apiKey');
     var shopName = template.get('shopName');
 
