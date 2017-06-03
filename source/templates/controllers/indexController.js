@@ -13,13 +13,22 @@ var indexController = function(){
 		var template = helpers.compileRactive({
 			template: 'item',
 			outlet: 'item',
-			data: {},
-			apiKey: helpers.loadFile('apiKey'),
-			shopName: helpers.loadFile('shopName')
+			data: {}
 		});
 
-    var apiKey = template.get('apiKey');
-    var shopName = template.get('shopName');
+		var apiKey;
+		var shopName;
+
+		$.ajax({
+			url   : '/assets/info.json',
+			async : false,
+			type  : 'GET'
+		}).done(function(data){
+			var credentials = JSON.stringify(data);
+
+			apiKey = data[0].apiKey;
+			shopName = data[1].shopName;
+		});
 
     $.ajax({
       url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
