@@ -10,10 +10,15 @@ var indexController = function(){
 
 	module.setupTemplates = function(){
 
-		var template = helpers.compileRactive({
+		var itemTemplate = helpers.compileRactive({
 			template: 'item',
 			outlet: 'item',
-			data: {}
+			data: {},
+			viewDetails: false
+		});
+
+		itemTemplate.on('viewToggle', function(){
+			itemTemplate.toggle('viewDetails');
 		});
 
 		var apiKey;
@@ -30,13 +35,30 @@ var indexController = function(){
 			shopName = data[1].shopName;
 		});
 
-    $.ajax({
-      url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
+		$.ajax({
+			url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
+			dataType: 'jsonp',
+			success: function(data){
+				console.log(data);
+				itemTemplate.set('result', data.results);
+			},
+		});
+
+		var menuTemplate = helpers.compileRactive({
+			template: 'menu',
+			outlet: 'menu',
+			data: {}
+		});
+
+		$.ajax({
+      url: "https://openapi.etsy.com/v2/shops/" + shopName + "/sections.js?api_key=" + apiKey,
       dataType: 'jsonp',
       success: function(data){
-        template.set('result', data.results);
+      	menuTemplate.set('categories', data.results);
       },
     });
+
+
 	};
 
   return module;
