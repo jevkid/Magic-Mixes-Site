@@ -17,25 +17,10 @@ html
 
   body
     block header
-      header
-        .nav-bar
-          ul.drop.container
-            li: a(href="/index.html") Home
-            li: a(href="#") Products
-              ul
-                li: a(href="/products.html") Earrings
-                li: a(href="#") Beaded Products
-                li: a(href="#") Wish Bracelets
-                li: a(href="#") Charms
-                li: a(href="#") Awareness Bracelets
-                li: a(href="#") Pendant/Necklaces
-                li: a(href="#") Pendants/Handbag Charms
-                li: a(href="#") Gemstone Bracelets
-                li: a(href="#") Gemstone & Sterling
-            li.right: a(href="/search.html")
-              i.ml-lg.fa.fa-search
-            li.right: a(href="/cart.html")
-              i.ml-lg.fa.fa-shopping-cart
+      include menu
+      header        
+        div(data-outlet="menu")
+                            
     block content
 
     block footer
