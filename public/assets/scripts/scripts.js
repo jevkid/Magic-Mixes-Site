@@ -56,7 +56,6 @@ var indexController = function(){
 			url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
 			dataType: 'jsonp',
 			success: function(data){
-				console.log(data);
 				itemTemplate.set('result', data.results);
 			},
 		});
@@ -84,5 +83,3 @@ var indexController = function(){
 $(document).ready(function() {
   indexController.init();
 });
-
-[{ "apiKey" : "tz1wjg6wvmvezr1o3xv4rom6"}, {"shopName" : "VelvetFoxStudio" }]
