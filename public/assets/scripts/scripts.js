@@ -1,66 +1,81 @@
 var helpers = function(){
 	var module = {};
 
-	module.compileRactive = function(options) {
-    var template = $('[data-template="' + options.template + '"]').html();
+	module.compileRactive = function(name) {
+    var template = $('[data-template="' + name.template + '"]').html();
 
     return new Ractive({
-      el: '[data-outlet="' + options.outlet + '"]',
+      el: '[data-outlet="' + name.outlet + '"]',
       template: template,
-      data: options.data ? options.data : {},
-      computed: options.computed ? options.computed : {}
+      data: name.data ? name.data : {},
+      computed: name.computed ? name.computed : {}
     });
-  };
-
-  module.compileHandlebars = function(options, overwrite) {
-    var template = document.querySelector('[data-template="' + options.template + '"]').innerHTML;
-
-    var hbsTemplate = Handlebars.compile(template);
-    var compiledTemplate = hbsTemplate(options.data ? options.data : {});
-
-    if(!options.$outlet) {
-      options.$outlet = $('[data-outlet="' + options.outlet + '"]');
-    }
-
-    if(overwrite) {
-      options.$outlet.html($(compiledTemplate));
-    } else {
-      options.$outlet.append($(compiledTemplate));
-    }
-
-
   };
 
   return module;
 }();
+
 var indexController = function(){
 
 	var module = {};
+	var credentials;
 
 	module.init = function(){
     indexController.setupTemplates();
-    console.log('setup');
+
 	};
 
 	module.setupTemplates = function(){
 
-		var template = helpers.compileRactive({
+		var itemTemplate = helpers.compileRactive({
 			template: 'item',
 			outlet: 'item',
+			data: {},
+			viewDetails: false
+		});
+
+		itemTemplate.on('viewToggle', function(target){
+			itemTemplate.toggle(target.keypath + '.viewDetails');
+		});
+
+		var apiKey;
+		var shopName;
+
+		$.ajax({
+			url   : '/assets/info.json',
+			async : false,
+			type  : 'GET'
+		}).done(function(data){
+			var credentials = JSON.stringify(data);
+
+			apiKey = data[0].apiKey;
+			shopName = data[1].shopName;
+		});
+
+		$.ajax({
+			url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
+			dataType: 'jsonp',
+			success: function(data){
+				console.log(data);
+				itemTemplate.set('result', data.results);
+			},
+		});
+
+		var menuTemplate = helpers.compileRactive({
+			template: 'menu',
+			outlet: 'menu',
 			data: {}
 		});
-    
-    var apiKey = 'tz1wjg6wvmvezr1o3xv4rom6';
-    var shopName = 'VelvetFoxStudio';
 
-    $.ajax({
-      url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
+		$.ajax({
+      url: "https://openapi.etsy.com/v2/shops/" + shopName + "/sections.js?api_key=" + apiKey,
       dataType: 'jsonp',
-      success: function(response){
-        template.set('result', response.results);
-        console.log(template.get('result'));
+      success: function(data){
+      	menuTemplate.set('categories', data.results);
       },
     });
+
+
 	};
 
   return module;
@@ -69,3 +84,5 @@ var indexController = function(){
 $(document).ready(function() {
   indexController.init();
 });
+
+[{ "apiKey" : "tz1wjg6wvmvezr1o3xv4rom6"}, {"shopName" : "VelvetFoxStudio" }]
