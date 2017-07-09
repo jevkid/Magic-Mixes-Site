@@ -1,17 +1,23 @@
-<!DOCTYPE html><html><head><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><title>Magic Mixes</title><script src="http://cdn.ractivejs.org/latest/ractive.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script><script src="/assets/scripts/scripts.js"></script><link rel="stylesheet" href="/assets/stylesheets/main.css"><link rel="stylesheet" href="/assets/stylesheets/bootstrap.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"><link href="https://fonts.googleapis.com/css?family=Cabin|Cabin+Condensed|News+Cycle|Questrial|Francois+One|Poppins|Josefin+Sans|Karla|Open+Sans+Condensed:300|Taviraj" rel="stylesheet"></head></head><body><script data-template="menu" type="text/ractive"><div class="nav-bar">
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><title>Magic Mixes</title><script src="http://cdn.ractivejs.org/latest/ractive.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script><script src="/assets/scripts/scripts.js"></script><link rel="stylesheet" href="/assets/stylesheets/main.css"><link rel="stylesheet" href="/assets/stylesheets/bootstrap.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"><link href="https://fonts.googleapis.com/css?family=Cabin|Cabin+Condensed|News+Cycle|Questrial|Francois+One|Poppins|Josefin+Sans|Karla|Open+Sans+Condensed:300|Taviraj" rel="stylesheet"></head><body><div data-outlet="dropdown"></div><div class="content"><div class="container">     <div data-outlet="items"></div></div></div><footer></footer></body></html>
+<script data-template="dropdown" type="text/ractive"><div class="nav-bar">
   <ul class="drop container">
     <li><a href="/index.html"> Home </a></li>
-    <li><a href="#"> Products </a>
+    <li> <a href="#"> Products </a>
       <ul>
-        {{#each categories}}
-          <li><a href="/products.html"> {{title}} </a></li>
+        {{#each sections}}
+          <li> <a href="/products.html"> {{title}} </a></li>
         {{/each}}
       </ul>
     </li>
-    <li class="right"><a href="/search.html"><i class="ml-lg fa fa-search"></i></a></li>
+    <li class="right"> <a on-click="searchProducts"> <i class="ml-lg fa fa-search"></i> </a> </li>
+    {{#if searchProducts}}
+      <input type="text"/>
+    {{/if}}
+    <li class="right"> <a href="/cart.html"> <i class="ml-lg fa fa-shopping-cart"></i> </a> </li>
   </ul>
-</div></script><header>       <div data-outlet="menu"></div></header><script data-template="item" type="text/ractive"><div class="row">
-  {{#each result}}
+</div></script>
+<script data-template="items" type="text/ractive"><div class="row">
+  {{#each items.results}}
     <div class="col-md-3 col-sm-6">
      	<div class="item">
         <img src="{{MainImage.url_170x135}}">
@@ -23,8 +29,8 @@
           	<p> {{description}}</p>
           {{/if}}
         </div>
-        <a class="btn mt-sm" href="#"> Add to cart </a>
+        <a class="btn mt-sm" href="{{url}}" target="_blanket"> Buy on Etsy </a>
       </div>
     </div>
   {{/each}}
-</div></script><div class="content"><div class="container"><div class="row"><div class="col-md-6"><div class="sort"><label>Sort by:</label><select><option>Price: High - Low</option><option>Price: Low - High</option></select></div></div></div><div data-outlet="item"></div></div></div><!--footer.footer--></body></html>
+</div></script>
