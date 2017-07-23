@@ -23,6 +23,7 @@
     "gulp-postcss": "^6.2.0",
     "gulp-ractive": "^0.8.0",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
     "gulp-uglify": "^2.0.1",
     "gulp-watch": "^4.3.10",
     "gulp-webserver": "^0.9.1",
@@ -40,7 +41,8 @@
   "main": "app.js",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-connect": "^5.0.0"
+    "gulp-connect": "^5.0.0",
+    "gulp-string-replace": "^0.4.0"
   },
   "repository": {
     "type": "git",

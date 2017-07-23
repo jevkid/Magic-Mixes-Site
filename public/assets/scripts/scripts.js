@@ -21,6 +21,7 @@ var itemsController = function(){
     itemsController.setupTemplates();
 	};
 
+
 	module.setupTemplates = function(){
 		var apiKey = 'tz1wjg6wvmvezr1o3xv4rom6';
 		var shopName = 'VelvetFoxStudio';
@@ -71,6 +72,10 @@ var searchController = function(){
 			data: {}
 		});
 
+		template.on('viewToggle', function(target){
+			template.toggle(target.keypath + '.viewDetails');
+		});
+
 		var query = window.location.search.split('?')[1];
     $.ajax({
       url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&keywords=" + query + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
@@ -78,6 +83,17 @@ var searchController = function(){
       success: function(response){
         template.set('items', response);
       },
+    });
+
+    template.on('viewAll', function(){
+    	$.ajax({
+	      url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
+	      dataType: 'jsonp',
+	      success: function(response){
+	      	console.log(response);
+	        template.set('items', response);
+	      },
+	    });
     });
 
 	};
@@ -112,7 +128,7 @@ var sectionController = function(){
 		});
 
 		template.on('searchProducts', function(target){
-			console.log(target);
+			window.location = window.location.origin + '/search?' + template.get('query');
 		});
 
     $.ajax({
@@ -122,7 +138,7 @@ var sectionController = function(){
         template.set('sections', response.results);
       },
     });
-
+    
 	};
 
   return module;
