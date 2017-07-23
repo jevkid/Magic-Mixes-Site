@@ -24,8 +24,9 @@ var jsFiles = 'source/templates/controllers/*',
     jsDest = 'public/assets/scripts';
 
 var apiInfo = {
-  apiKey: ***
-  shopName: ***
+  apiKey: 'tz1wjg6wvmvezr1o3xv4rom6',
+  // shopName: 'VelvetFoxStudio'
+  shopName: 'MagicMixes'
 };
 
 gulp.task('scripts', function(){
@@ -63,7 +64,7 @@ gulp.task('copy-index', function(){
     return gulp.src(['source/templates/views/extends/layout.jade', 'source/templates/views/index.jade', '!source/templates/views/extends/*', 'source/templates/views/handlebars/*'])
         .pipe(jade())
         .pipe(concat('index.html'))
-        .pipe(gulp.dest('public/index'));
+        .pipe(gulp.dest('public'));
 });
 
 gulp.task('copy-products', function(){

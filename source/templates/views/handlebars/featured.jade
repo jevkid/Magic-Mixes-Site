@@ -1,0 +1,10 @@
+include partials/itemPartial
+script(data-template='featured', type='text/ractive').
+	<div class="featured">
+	  <div class="col-md-9 col-xs-12 text-center">
+	  	<h1 class="magic">Featured Listings</h1>
+	    {{#each items.results:index}}
+	      {{> itemPartial}}
+	    {{/each}}
+	  </div>
+	</div>

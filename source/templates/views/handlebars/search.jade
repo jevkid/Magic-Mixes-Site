@@ -1,23 +1,12 @@
+include partials/itemPartial
+
 script(data-template='search', type='text/ractive').
   <div class="row">
     {{#if items.results}}
-      {{#each items.results}}
-      <div class="col-md-3 col-sm-6">
-         	<div class="item">
-            <img src="{{MainImage.url_170x135}}">
-            <h4> {{{title}}} </h4>
-            <h5> Price: £{{price}} </h5>
-            <div class="item-content">
-              <a class="view" on-click="viewToggle">View {{#if viewDetails}} Less {{else}} More {{/if}}</a>
-              {{#if viewDetails}}
-              	<p> {{{description}}}</p>
-              {{/if}}
-            </div>
-            <a class="btn mt-sm" href="{{url}}" target="_blanket"> Buy on Etsy </a>
-          </div>
-        </div>
+      {{#each items.results:index}}
+        {{> itemPartial}}
       {{/each}}
     {{else}}
-      <p> Sorry, no results matched your search. <a on-click="viewAll">View all items?</a></p>
+      <p> Sorry, no results matched your search. <a class="view" on-click="viewAll">View all items?</a></p>
     {{/if}}
   </div>

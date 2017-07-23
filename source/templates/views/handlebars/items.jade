@@ -1,19 +1,7 @@
+include partials/itemPartial
 script(data-template='items', type='text/ractive').
-  <div>
-    {{#each items.results}}
-      <div class="col-md-3 col-sm-6">
-       	<div class="item">
-          <img src="{{MainImage.url_170x135}}">
-          <h4> {{{title}}} </h4>
-          <h5> Price: £{{price}} </h5>
-          <div class="item-content">
-            <a class="view" on-click="viewToggle">View {{#if viewDetails}} Less {{else}} More {{/if}}</a>
-            {{#if viewDetails}}
-            	<p> {{{description}}}</p>
-            {{/if}}
-          </div>
-          <a class="btn mt-sm" href="{{url}}"> Buy on Etsy </a>
-        </div>
-      </div>
+  <div class="row">
+    {{#each items.results:index}}
+      {{> itemPartial}}
     {{/each}}
   </div>
