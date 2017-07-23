@@ -1,0 +1,61 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><title>Magic Mixes</title><script src="http://cdn.ractivejs.org/latest/ractive.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script><script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script><script src="/assets/scripts/scripts.js"></script><link rel="stylesheet" href="/assets/stylesheets/main.css"><link rel="stylesheet" href="/assets/stylesheets/bootstrap.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"><link href="https://fonts.googleapis.com/css?family=Cabin|Open+Sans|News+Cycle|Questrial|Francois+One|Poppins|Josefin+Sans|Karla|Open+Sans+Condensed:300|Taviraj" rel="stylesheet"></head><body><div data-outlet="dropdown"></div><div class="content"><div class="container"><div class="row"><div class="col-sm-9"><div class="about"><h1>Welcome to Magic Mixes!          </h1><p>Crystal Gemstone Jewelery- made to order, just for you!</p><p>My first love has always been crystals and semi precious gemstones. A result of this fascination lead me to research and study the apparent healing and emotionally stabilising effect that these gemstones have upon our mind and body.I began making crystal healing bracelets for friends, to address issues such as migraine, PMS etc, then gradually began experimenting with other forms of jewellery making, branching out my designs and ranges. </p><p>I love the whole process of making my jewellery, from researching a new request and designing then creating a beautiful necklace or bracelet. I love that moment when the item is complete, and I sit holding it, relaxing and feeling the stones, putting lots of love and energy into the piece. So, my overall commitment is still to offer clients the healing properties of gemstones (and aromatherapy oils) although smelling and looking gorgeous and wearing beautiful jewellery comes a very close second!</p></div></div><div class="col-sm-3"><div class="card"><h3>About the Artist</h3><img src="/assets/images/logo.jpg"><p>I was a primary school teacher for many years, until mobility and illness issues forced an early ill health retirement. Since then, I have indulged my love of crafty things, moving on from card making and scrapbooking to jewellery making and taking an aromatherapy course. </p></div></div></div></div></div><footer></footer></body></html>
+<script data-template="dropdown" type="text/ractive"><div class="nav-bar">
+  <ul class="drop container">
+    <li><a href="/index"> Home </a></li>
+    <li> <a href="#"> Products </a>
+      <ul>
+        {{#each sections}}
+          <li> <a href="/products?{{title}}"> {{title}} </a></li>
+        {{/each}}
+      </ul>
+    </li>
+    <li class="right"> 
+      {{#if searchInput}}
+        <input type="text" value={{query}} class="search" placeholder="Keyword..."/>
+        <a on-click="searchProducts:{{query}}"> <i class="ml-lg fa fa-search"></i></a>
+      {{else}}
+        <a on-click="searchText"> <i class="ml-lg fa fa-search"></i> </a> 
+      {{/if}}
+    </li>
+  </ul>
+</div></script>
+<script data-template="items" type="text/ractive"><div>
+  {{#each items.results}}
+    <div class="col-md-3 col-sm-6">
+     	<div class="item">
+        <img src="{{MainImage.url_170x135}}">
+        <h4> {{{title}}} </h4>
+        <h5> Price: £{{price}} </h5>
+        <div class="item-content">
+          <a class="view" on-click="viewToggle">View {{#if viewDetails}} Less {{else}} More {{/if}}</a>
+          {{#if viewDetails}}
+          	<p> {{{description}}}</p>
+          {{/if}}
+        </div>
+        <a class="btn mt-sm" href="{{url}}"> Buy on Etsy </a>
+      </div>
+    </div>
+  {{/each}}
+</div></script>
+<script data-template="search" type="text/ractive"><div class="row">
+  {{#if items.results}}
+    {{#each items.results}}
+    <div class="col-md-3 col-sm-6">
+       	<div class="item">
+          <img src="{{MainImage.url_170x135}}">
+          <h4> {{{title}}} </h4>
+          <h5> Price: £{{price}} </h5>
+          <div class="item-content">
+            <a class="view" on-click="viewToggle">View {{#if viewDetails}} Less {{else}} More {{/if}}</a>
+            {{#if viewDetails}}
+            	<p> {{{description}}}</p>
+            {{/if}}
+          </div>
+          <a class="btn mt-sm" href="{{url}}" target="_blanket"> Buy on Etsy </a>
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+    <p> Sorry, no results matched your search. <a on-click="viewAll">View all items?</a></p>
+  {{/if}}
+</div></script>

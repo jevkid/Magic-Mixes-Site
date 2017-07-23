@@ -26,7 +26,7 @@ body.login {
       display: inline-block;
       padding: 10px 10px;
       a {
-        font-family: @open;
+        font-family: @cabin;
         font-size: 20px;
         color: @secondary;
       }
@@ -74,6 +74,12 @@ body.login {
       float: right;
     }
   }
+  input {
+    border: 1px solid #C2C2C2;
+    border-radius: 3px;
+    padding: 5px;
+    outline: none;
+  }
 }
 .about {
   width: 75%;
@@ -90,19 +96,16 @@ body.login {
   text-align: center;
   margin-bottom: 51px;
   box-shadow: 0px 1px 2px 0px rgba(0,0,0,.2);
-  padding: 5px;
-  padding-bottom: 20px;
+  padding: 5px 0;
   img {
     padding-top: 15px;
-    width: 170px;
+    width: 150px;
   }
+
   a.view {
-    color: @primary;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  .item-content {
-    margin-bottom: 5px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
 }
@@ -123,8 +126,7 @@ body.login {
   box-shadow: 0px 1px 2px 0px rgba(0,0,0,.2);
   img {
     width: 100px;
-    border-radius: 50%;
-    margin-top: 30px;
+    border-radius: 50%;    
   }
   h3, h4, h5 {
     padding-top: 15px;

@@ -1,16 +1,15 @@
 var helpers = function(){
 	var module = {};
 
-	module.compileRactive = function(name) {
-    var template = $('[data-template="' + name.template + '"]').html();
+	module.compileRactive = function(options) {
+    var template = $('[data-template="' + options.template + '"]').html();
 
     return new Ractive({
-      el: '[data-outlet="' + name.outlet + '"]',
+      el: '[data-outlet="' + options.outlet + '"]',
       template: template,
-      data: name.data ? name.data : {},
-      computed: name.computed ? name.computed : {}
+      data: options.data ? options.data : {},
+      computed: options.computed ? options.computed : {}
     });
   };
-
   return module;
 }();

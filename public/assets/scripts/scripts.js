@@ -1,79 +1,49 @@
 var helpers = function(){
 	var module = {};
 
-	module.compileRactive = function(name) {
-    var template = $('[data-template="' + name.template + '"]').html();
+	module.compileRactive = function(options) {
+    var template = $('[data-template="' + options.template + '"]').html();
 
     return new Ractive({
-      el: '[data-outlet="' + name.outlet + '"]',
+      el: '[data-outlet="' + options.outlet + '"]',
       template: template,
-      data: name.data ? name.data : {},
-      computed: name.computed ? name.computed : {}
+      data: options.data ? options.data : {},
+      computed: options.computed ? options.computed : {}
     });
   };
-
   return module;
 }();
-
-var indexController = function(){
+var itemsController = function(){
 
 	var module = {};
-	var credentials;
 
 	module.init = function(){
-    indexController.setupTemplates();
-
+    itemsController.setupTemplates();
 	};
 
+
 	module.setupTemplates = function(){
+		var apiKey = 'tz1wjg6wvmvezr1o3xv4rom6';
+		var shopName = 'VelvetFoxStudio';
 
-		var itemTemplate = helpers.compileRactive({
-			template: 'item',
-			outlet: 'item',
-			data: {},
-			viewDetails: false
-		});
-
-		itemTemplate.on('viewToggle', function(target){
-			itemTemplate.toggle(target.keypath + '.viewDetails');
-		});
-
-		var apiKey;
-		var shopName;
-
-		$.ajax({
-			url   : '/assets/info.json',
-			async : false,
-			type  : 'GET'
-		}).done(function(data){
-			var credentials = JSON.stringify(data);
-
-			apiKey = data[0].apiKey;
-			shopName = data[1].shopName;
-		});
-
-		$.ajax({
-			url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
-			dataType: 'jsonp',
-			success: function(data){
-				itemTemplate.set('result', data.results);
-			},
-		});
-
-		var menuTemplate = helpers.compileRactive({
-			template: 'menu',
-			outlet: 'menu',
+		var template = helpers.compileRactive({
+			template: 'items',
+			outlet: 'items',
 			data: {}
 		});
 
-		$.ajax({
-      url: "https://openapi.etsy.com/v2/shops/" + shopName + "/sections.js?api_key=" + apiKey,
+		template.on('viewToggle', function(target){
+			template.toggle(target.keypath + '.viewDetails');
+		});
+
+		var category = window.location.search.split('?')[1];
+    $.ajax({
+      url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&shop_section_id=" + category + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
       dataType: 'jsonp',
-      success: function(data){
-      	menuTemplate.set('categories', data.results);
+      success: function(response){
+        template.set('items', response);
       },
     });
-
 
 	};
 
@@ -81,5 +51,99 @@ var indexController = function(){
 }();
 
 $(document).ready(function() {
-  indexController.init();
+  itemsController.init();
+});
+
+var searchController = function(){
+
+	var module = {};
+
+	module.init = function(){
+    searchController.setupTemplates();
+	};
+
+	module.setupTemplates = function(){
+		var apiKey = 'tz1wjg6wvmvezr1o3xv4rom6';
+		var shopName = 'VelvetFoxStudio';
+
+		var template = helpers.compileRactive({
+			template: 'search',
+			outlet: 'search',
+			data: {}
+		});
+
+		template.on('viewToggle', function(target){
+			template.toggle(target.keypath + '.viewDetails');
+		});
+
+		var query = window.location.search.split('?')[1];
+    $.ajax({
+      url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&keywords=" + query + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
+      dataType: 'jsonp',
+      success: function(response){
+        template.set('items', response);
+      },
+    });
+
+    template.on('viewAll', function(){
+    	$.ajax({
+	      url: "https://openapi.etsy.com/v2/shops/" + shopName + "/listings/active.js?api_key=" + apiKey + "&includes=MainImage&fields=url,price,title,shop_section_id,description&limit=100",
+	      dataType: 'jsonp',
+	      success: function(response){
+	      	console.log(response);
+	        template.set('items', response);
+	      },
+	    });
+    });
+
+	};
+
+  return module;
+}();
+
+$(document).ready(function() {
+  searchController.init();
+});
+
+var sectionController = function(){
+
+	var module = {};
+
+	module.init = function(){
+    sectionController.setupTemplates();
+	};
+
+	module.setupTemplates = function(){
+		var apiKey = 'tz1wjg6wvmvezr1o3xv4rom6';
+		var shopName = 'VelvetFoxStudio';
+
+		var template = helpers.compileRactive({
+			template: 'dropdown',
+			outlet: 'dropdown',
+			data: {}
+		});
+
+		template.on('searchText', function(){
+			template.toggle('searchInput');
+		});
+
+		template.on('searchProducts', function(target){
+			window.location = window.location.origin + '/search?' + template.get('query');
+		});
+
+    $.ajax({
+      url: "https://openapi.etsy.com/v2/shops/" + shopName + "/sections.js?api_key=" + apiKey,
+      dataType: 'jsonp',
+      success: function(response){
+        template.set('sections', response.results);
+      },
+    });
+    
+	};
+
+  return module;
+}();
+
+$(document).ready(function() {
+  sectionController.init();
 });
