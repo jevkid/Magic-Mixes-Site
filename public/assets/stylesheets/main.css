@@ -69,15 +69,6 @@ html body {
   background-color: #E9E9E9 !important;
   margin: 0;
 }
-html.login {
-  background: #2D0F3A url("/assets/images/1.jpg") no-repeat;
-}
-body.login {
-  background-color: transparent !important;
-}
-.content {
-  z-index: 30;
-}
 .nav-bar {
   width: 100%;
   top: 0;
@@ -86,15 +77,22 @@ body.login {
 .nav-bar ul {
   z-index: 50;
   position: relative;
-  padding: 5px 0;
+  display: block;
+  color: #333;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 32px;
+  padding: 0 15px;
 }
 .nav-bar ul li {
   list-style: none;
   display: inline-block;
   padding: 10px 10px;
+  position: relative;
+  float: left;
+  margin: 0;
 }
 .nav-bar ul li a {
-  font-family: "Cabin";
   font-size: 20px;
   color: #d2cbed;
 }
@@ -107,23 +105,22 @@ body.login {
   float: right;
 }
 .nav-bar ul li ul {
-  overflow: hidden;
-  margin-top: 10px;
-  position: absolute;
-  background-color: #D9D7DD;
-  box-shadow: 2px 2px 5px #0c1f42;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-top: none;
   display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #D9D7DD;
+  padding: 0;
+  width: 200px;
 }
 .nav-bar ul li ul li {
   display: block;
-}
-.nav-bar ul li ul li:last-child {
   float: none;
 }
 .nav-bar ul li ul li a {
+  font-size: 14px;
   color: #2D0F3A;
+  padding: 10px 0;
 }
 .nav-bar ul li ul li:hover {
   background: #2D0F3A url("/assets/images/1.jpg") repeat right;
@@ -134,45 +131,28 @@ body.login {
 .nav-bar ul li:hover > ul {
   display: block;
 }
-.nav-bar ul.drop li:last-child {
+.nav-bar ul.drop li.right:last-child {
   float: right;
 }
 .nav-bar input {
   border: 1px solid #C2C2C2;
   border-radius: 3px;
-  padding: 5px;
   outline: none;
 }
 .about {
-  width: 75%;
   text-align: center;
+  padding-top: 15px;
 }
 .about p {
   padding-top: 15px;
+  font-size: 16px;
 }
-.item {
-  height: auto;
-  background: #ffffff;
-  text-align: center;
-  margin-bottom: 51px;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
-  padding: 5px 0;
+.about h1 {
+  font-family: "Emilys Candy";
+  color: #2D0F3A;
 }
-.item img {
+.about h4 {
   padding-top: 15px;
-  width: 150px;
-}
-.item a.view:hover {
-  cursor: pointer;
-}
-.cart-item {
-  height: auto;
-  padding: 15px 10px;
-  border-bottom: 1px solid #d2cbed;
-}
-.cart-item img {
-  border: 1px solid #36362C;
-  width: 150px;
 }
 .card {
   height: 400px;
@@ -195,15 +175,51 @@ body.login {
   width: 80%;
   margin: 0 auto;
 }
-.cart {
+.card .icons {
+  margin-top: 10px;
+}
+.card .icons a {
+  padding: 10px;
+  color: #2D0F3A;
+}
+.card .icons a:hover {
+  cursor: pointer;
+  color: #d2cbed;
+}
+.slider {
   width: auto;
-  height: 100%;
+}
+.slider .arrows i {
+  padding: 10px;
+  color: #2D0F3A;
+}
+.slider .arrows i:hover {
+  cursor: pointer;
+  color: #d2cbed;
+}
+.featured {
+  margin-top: -75px;
+}
+.item {
+  vertical-align: top;
+  display: inline-block;
+  width: 22%;
   background: #ffffff;
+  text-align: center;
+  margin: 25px 10px;
   padding: 10px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
 }
-.cart .row {
-  margin-left: 50px;
+.item img {
+  padding-top: 15px;
+  width: 150px;
+}
+a.view {
+  color: #2D0F3A;
+}
+a.view:hover {
+  cursor: pointer;
+  color: #d2cbed;
 }
 .sort {
   padding: 10px 0;
@@ -211,11 +227,18 @@ body.login {
 .sort label {
   margin-right: 5px;
 }
+h1.magic {
+  color: #2D0F3A;
+  font-family: "Emilys Candy" !important;
+}
 .btn {
   width: auto;
   padding: 2px 2px;
   background-color: #2D0F3A;
   color: #d2cbed;
+}
+.btn:hover {
+  color: #ffffff !important;
 }
 .footer {
   width: 100%;
@@ -224,34 +247,5 @@ body.login {
   position: fixed;
   margin: 0 auto;
   background: #2D0F3A url("/assets/images/1.jpg") repeat top left;
-}
-.login-box {
-  height: 400px;
-  width: 500px;
-  margin: 10% auto;
-  background: #ffffff;
-  text-align: center;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
-}
-.login-box h2 {
-  padding-top: 20%;
-}
-.login-box .form-group {
-  padding-top: 25px;
-}
-.login-box a {
-  margin-top: 35px;
-}
-.form-group {
-  display: block;
-}
-.form-group input {
-  margin: 5px 5px 5px 0px;
-}
-.form-group label {
-  margin-right: 5px;
-}
-.form-group .text-right {
-  text-align: right;
 }
 /**  Variables **/
