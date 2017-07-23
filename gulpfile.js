@@ -24,8 +24,8 @@ var jsFiles = 'source/templates/controllers/*',
     jsDest = 'public/assets/scripts';
 
 var apiInfo = {
-  apiKey: 'tz1wjg6wvmvezr1o3xv4rom6',
-  shopName: 'VelvetFoxStudio'
+  apiKey: ***
+  shopName: ***
 };
 
 gulp.task('scripts', function(){
